@@ -2,8 +2,14 @@ const express = require("express");
 const morgan = require("morgan");
 const app = express();
 
-app.use(morgan("tiny"));
 app.use(express.json());
+app.use(morgan("tiny"));
+
+const logger = (req, res, next) => {
+  console.log(req.body);
+  next();
+};
+app.use(logger);
 
 let persons = [
   {
